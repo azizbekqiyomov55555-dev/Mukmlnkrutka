@@ -1,43 +1,38 @@
-# fly.toml — Fly.io konfiguratsiyasi (POLLING bot uchun)
+# fly.toml app configuration file generated for mukmlnkrutka on 2026-04-30T10:27:16Z
 #
-# DEPLOY QILISH:
-#   1) flyctl auth login
-#   2) fly launch --no-deploy --copy-config --name <sizning-app-nomi>
-#      (yoki mavjud appga: app nomini quyida o'zgartiring)
-#   3) fly volumes create bot_data --region fra --size 1
-#   4) fly secrets set BOT_TOKEN=xxxx ADMIN_IDS="123456789"
-#   5) fly deploy
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
-# ⚠️ MUHIM: Bu bot HTTP server emas — faqat Telegram polling.
-# Shuning uchun [http_service] / [[services]] BLOKLARI YO'Q.
-# Agar siz ularni qo'shsangiz, Fly 8080-portni kutadi va
-# "machine has reached its max restart count" xatosi chiqadi.
 
-app = "kinobotmukamal"
-primary_region = "fra"
+app = 'mukmlnkrutka'
+primary_region = 'fra'
 
-[build]
-  dockerfile = "Dockerfile"
-
-[env]
-  TZ = "Asia/Tashkent"
-  DB_PATH = "/data/smm_bot.db"
-
-# SQLite uchun doimiy disk
-[mounts]
-  source = "bot_data"
-  destination = "/data"
-
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory = "512mb"
-
-# Bitta machine yetarli (polling — bir nechta instans bo'lsa,
-# Telegram'da getUpdates conflict bo'ladi)
-[deploy]
-  strategy = "immediate"
-
-# Polling jarayoni har doim ishlab turishi kerak — auto-stop YO'Q
 [experimental]
   auto_rollback = true
+
+[build]
+  dockerfile = 'Dockerfile'
+
+[deploy]
+  strategy = 'immediate'
+
+[env]
+  DB_PATH = '/data/smm_bot.db'
+  TZ = 'Asia/Tashkent'
+
+[[mounts]]
+  source = 'bot_data'
+  destination = '/data'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 2048
