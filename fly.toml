@@ -1,4 +1,8 @@
-# fly.toml — 24/7 ishlash uchun sozlangan
+# fly.toml app configuration file generated for mukmlnkrutka on 2026-04-30T11:38:05Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
 app = 'mukmlnkrutka'
 primary_region = 'fra'
 
@@ -10,8 +14,8 @@ primary_region = 'fra'
 
 [env]
   DB_PATH = '/data/smm_bot.db'
-  TZ = 'Asia/Tashkent'
   PORT = '8080'
+  TZ = 'Asia/Tashkent'
 
 [processes]
   app = 'python -u bot.py'
@@ -20,22 +24,19 @@ primary_region = 'fra'
   source = 'bot_data'
   destination = '/data'
 
-# HTTP service — Fly machine'ni "alive" deb hisoblashi uchun
-# bot ichida 8080 portda kichik healthcheck server ishlaydi.
 [http_service]
   internal_port = 8080
   force_https = true
-  # MUHIM: bot 24/7 ishlashi uchun avtomatik to'xtatishni o'chiramiz
   auto_stop_machines = 'off'
   auto_start_machines = true
   min_machines_running = 1
   processes = ['app']
 
   [[http_service.checks]]
-    grace_period = '30s'
     interval = '30s'
-    method = 'GET'
     timeout = '10s'
+    grace_period = '30s'
+    method = 'GET'
     path = '/health'
 
 [[vm]]
