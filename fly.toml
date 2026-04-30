@@ -19,7 +19,7 @@ primary_region = 'fra'
   destination = '/data'
 
 [processes]
-  app = 'python main.py'
+  app = 'python bot.py'
 
 [[vm]]
   cpu_kind = 'shared'
