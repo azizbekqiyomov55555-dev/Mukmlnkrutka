@@ -32,12 +32,12 @@ logger = logging.getLogger(__name__)
 #  ⚙️  SOZLAMALAR
 # ============================================================
 import os
-BOT_TOKEN = os.getenv("BOT_TOKEN", "8677382055:AAELi91uCpxhz_Tmvy5R3XK9qbl4iIzosFM")
-_admin_env = os.getenv("ADMIN_IDS", "")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "8334690037:AAEA0eHoq-EOR8S0qHHGIVnfWFtm81q9lTo")
+_admin_env = os.getenv("ADMIN_IDS", "5036729145")
 if _admin_env.strip():
     ADMIN_IDS = [int(x) for x in _admin_env.replace(",", " ").split() if x.strip().isdigit()]
 else:
-    ADMIN_IDS = [8537782289]
+    ADMIN_IDS = [5036729145]
 
 def get_platforms():
     conn = db(); c = conn.cursor()
