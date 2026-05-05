@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 #  ⚙️  SOZLAMALAR
 # ============================================================
 import os
-BOT_TOKEN = os.getenv("BOT_TOKEN", "8334690037:AAEA0eHoq-EOR8S0qHHGIVnfWFtm81q9lTo")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "8334690037:AAEi4xc1l_lUueWX5Mevo3eWrZ8OLxih6cY")
 _admin_env = os.getenv("ADMIN_IDS", "5036729145")
 if _admin_env.strip():
     ADMIN_IDS = [int(x) for x in _admin_env.replace(",", " ").split() if x.strip().isdigit()]
